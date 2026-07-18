@@ -1,0 +1,62 @@
+{
+  "name": "@elizonapp/plesk-ts-sdk",
+  "version": "1.0.0",
+  "description": "TypeScript SDK for the Plesk REST API",
+  "license": "MIT",
+  "author": "elizonapp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elizonapp/plesk-ts-sdk.git"
+  },
+  "homepage": "https://github.com/elizonapp/plesk-ts-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/elizonapp/plesk-ts-sdk/issues"
+  },
+  "keywords": [
+    "plesk",
+    "plesk-api",
+    "sdk",
+    "api",
+    "typescript",
+    "rest",
+    "hosting"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE.md",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean --sourcemap",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "smoke": "npm run build && node scripts/smoke-models.mjs"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "dependencies": {
+    "generate-password": "^1.7.1",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.prettierrc
+.env
+*.tsbuildinfo
+_schemas_dump.json
+_paths_dump.json
+
+openapi.json

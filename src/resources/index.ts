@@ -1,0 +1,10 @@
+export { AuthResource } from "./auth.js";
+export { CliResource } from "./cli.js";
+export { ServerResource } from "./server.js";
+export { ExtensionsResource } from "./extensions.js";
+export { ClientsResource } from "./clients.js";
+export { DomainsResource } from "./domains.js";
+export { FilesResource } from "./files.js";
+export { FtpUsersResource } from "./ftpusers.js";
+export { DatabasesResource } from "./databases.js";
+export { DnsResource } from "./dns.js";
