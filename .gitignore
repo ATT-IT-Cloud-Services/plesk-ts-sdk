@@ -7,3 +7,4 @@ _schemas_dump.json
 _paths_dump.json
 
 openapi.json
+package-lock.json
