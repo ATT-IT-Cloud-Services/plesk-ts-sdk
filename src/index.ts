@@ -21,3 +21,14 @@ export {
   suspendClient,
   activateClient,
 } from "./helpers/index.js";
+export {
+  encodeCliParams,
+  decodeCliParams,
+  parseCliOutput,
+  camelToCliFlag,
+  cliFlagToCamel,
+  ManagedResources,
+  CliUtilities,
+  type CliCallOptions,
+  type CliInvocationResult,
+} from "./cli/index.js";

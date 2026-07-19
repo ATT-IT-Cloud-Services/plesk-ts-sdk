@@ -4,8 +4,13 @@ import {
   CliCallRequestSchema,
   type CliCallRequest,
   type CliCallResponse,
+  type CliRefResponse,
 } from "../models/cli.js";
 
+/**
+ * Low-level gate access for advanced use.
+ * Prefer top-level namespaces on PleskClient (e.g. `plesk.subscription.create`).
+ */
 export class CliResource {
   constructor(private readonly http: HttpClient) {}
 
@@ -15,7 +20,7 @@ export class CliResource {
   }
 
   /** GET /cli/{id}/ref */
-  getRef(id: string): Promise<unknown> {
+  getRef(id: string): Promise<CliRefResponse> {
     return this.http.request({
       method: "GET",
       path: `/cli/${encodeURIComponent(id)}/ref`,
@@ -27,7 +32,10 @@ export class CliResource {
     return this.http.request({
       method: "POST",
       path: `/cli/${encodeURIComponent(id)}/call`,
-      body: parseOrThrow(CliCallRequestSchema, body),
+      body: parseOrThrow(CliCallRequestSchema, {
+        fail_on_error: true,
+        ...body,
+      }),
     });
   }
 }

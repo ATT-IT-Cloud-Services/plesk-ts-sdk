@@ -17,6 +17,12 @@ import { FtpUsersResource } from "./resources/ftpusers.js";
 import { DatabasesResource } from "./resources/databases.js";
 import { DnsResource } from "./resources/dns.js";
 import { Helpers } from "./helpers/index.js";
+import {
+  attachManagedResources,
+  type ManagedClientNamespaces,
+} from "./cli/generated/client-mixin.js";
+
+export interface PleskClient extends ManagedClientNamespaces {}
 
 export class PleskClient {
   private readonly http: HttpClient;
@@ -27,6 +33,7 @@ export class PleskClient {
   private _impersonateLogin?: string;
 
   readonly auth: AuthResource;
+  /** Low-level gate; prefer namespaces like `subscription`, `mail`, … */
   readonly cli: CliResource;
   readonly server: ServerResource;
   readonly extensions: ExtensionsResource;
@@ -63,6 +70,8 @@ export class PleskClient {
     this.databases = new DatabasesResource(this.http);
     this.dns = new DnsResource(this.http);
     this.helpers = new Helpers(this);
+
+    attachManagedResources(this as unknown as ManagedClientNamespaces, this.http);
   }
 
   get ips(): string[] {

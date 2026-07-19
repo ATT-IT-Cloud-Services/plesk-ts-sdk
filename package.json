@@ -34,6 +34,8 @@
   },
   "files": [
     "dist",
+    "data/cli-function-list.md",
+    "examples",
     "LICENSE.md",
     "README.md"
   ],
@@ -41,10 +43,17 @@
     "node": ">=18"
   },
   "scripts": {
+    "cli:scrape": "node scripts/scrape-cli-docs.mjs",
+    "cli:scrape:fetch": "node scripts/scrape-cli-docs.mjs --fetch",
+    "cli:function-list": "node scripts/generate-cli-function-list.mjs",
+    "cli:generate": "node scripts/generate-cli.mjs",
+    "cli:build": "npm run cli:scrape && npm run cli:function-list && npm run cli:generate",
     "build": "tsup src/index.ts --format esm,cjs --dts --clean --sourcemap",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "smoke": "npm run build && node scripts/smoke-models.mjs"
+    "smoke": "npm run build && node scripts/smoke-models.mjs && node scripts/smoke-cli.mjs",
+    "test:cli": "node scripts/test-cli-parsers.mjs",
+    "examples:overview": "node --experimental-strip-types examples/fetch-overview.ts"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",

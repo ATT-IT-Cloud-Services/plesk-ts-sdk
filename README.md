@@ -33,6 +33,8 @@ const ips = await plesk.server.listIps();
 console.log(ips);
 ```
 
+Runnable fetch examples (REST JSON + management APIs): see [`examples/`](examples/).
+
 ### Auth variants
 
 ```ts
@@ -56,7 +58,7 @@ new PleskClient({
 | Namespace | Methods |
 |-----------|---------|
 | `auth` | `createKey`, `deleteKey`, `createSession` |
-| `cli` | `listCommands`, `getRef`, `call` |
+| `cli` | Low-level gate only (`listCommands`, `getRef`, `call`) |
 | `server` | `getMeta`, `init`, `installLicense`, `listIps` |
 | `extensions` | `list`, `install`, `get`, `delete`, `enable`, `disable` |
 | `clients` | `list`, `create`, `get`, `update`, `delete`, `listDomains`, `getStatistics`, `activate`, `suspend` |
@@ -67,6 +69,32 @@ new PleskClient({
 | `dns` | `listRecords`, `createRecord`, `getRecord`, `updateRecord`, `deleteRecord` |
 
 Request bodies are validated with **Zod**. Responses are typed TypeScript interfaces.
+
+## Management APIs
+
+Same style as REST resources — Zod-validated request bodies and typed responses. Examples:
+
+```ts
+await plesk.subscription.create({
+  name: "example.com",
+  owner: "admin",
+  servicePlan: "Default Domain",
+  ip: "192.168.1.100",
+  login: "jdoe",
+  passwd: "userpass",
+});
+// → ActionResponse { status: "ok", message?: string }
+
+await plesk.mail.list({});
+await plesk.site.create({ name: "shop.example.com", webspaceName: "example.com" });
+await plesk.customer.create({ name: "jdoe", passwd: "secret" });
+```
+
+Namespaces include `subscription`, `mail`, `site`, `customer`, `reseller`, `phpHandler`, `dnsZones`, … (full list in [`data/cli-function-list.md`](data/cli-function-list.md)).
+
+```bash
+npm run cli:build
+```
 
 ## Helpers
 
@@ -114,8 +142,10 @@ await plesk.helpers.activateDomain(7);
 
 ```bash
 npm install
+npm run cli:build    # scrape catalog + function list + generate typed CLI
 npm run typecheck
 npm run build
+npm run test:cli
 npm run smoke
 ```
 

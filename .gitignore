@@ -8,3 +8,4 @@ _paths_dump.json
 
 openapi.json
 package-lock.json
+data/

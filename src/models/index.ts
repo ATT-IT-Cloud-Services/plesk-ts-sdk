@@ -1,5 +1,6 @@
 export * from "./auth.js";
 export * from "./cli.js";
+export * from "./cli-commands/index.js";
 export * from "./client.js";
 export * from "./common.js";
 export * from "./database.js";

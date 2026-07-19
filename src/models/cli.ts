@@ -15,3 +15,9 @@ export interface CliCallResponse {
   stderr?: string;
 }
 
+/** GET /cli/{id}/ref */
+export interface CliRefResponse {
+  allowed_commands?: Record<string, unknown>;
+  allowed_options?: Record<string, unknown>;
+}
+

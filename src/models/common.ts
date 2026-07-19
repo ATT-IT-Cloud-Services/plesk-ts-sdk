@@ -2,6 +2,12 @@ export interface StatusResponse {
   status: string;
 }
 
+/** Successful mutating / management call */
+export interface ActionResponse {
+  status: string;
+  message?: string;
+}
+
 export interface CreatedResponse {
   id: number;
   guid: string;
