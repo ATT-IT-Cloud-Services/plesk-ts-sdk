@@ -2,7 +2,7 @@
   "name": "@elizonapp/plesk-ts-sdk",
   "version": "1.0.0",
   "description": "TypeScript SDK for the Plesk REST API",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE.md",
   "author": "ATT-IT Cloud Services",
   "repository": {
     "type": "git",
